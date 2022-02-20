@@ -12,11 +12,11 @@ const SideMenu = (): JSX.Element => {
             <HomeIcon width="1.8rem" />
           </a>
         </Link>
-        <Link href="/users">
+        {/* <Link href="/users">
           <a>
             <UserIcon width="1.8rem" />
           </a>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

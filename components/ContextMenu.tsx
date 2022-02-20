@@ -1,6 +1,9 @@
 import PlaylistCard from "./PlaylistCard";
+import { ArrowSmRightIcon } from "@heroicons/react/solid";
+import Link from "next/link";
+import { Playlist } from "@prisma/client";
 
-const ContextMenu = (): JSX.Element => {
+const ContextMenu = ({ playlists, tracks }: any): JSX.Element => {
   return (
     <>
       <div className="w-full">
@@ -8,21 +11,27 @@ const ContextMenu = (): JSX.Element => {
           <span className="font-bold">Overview</span>
           <div className="flex justify-content-between">
             <span>Playlists</span>
-            <span>123</span>
+            <span>{playlists.length}</span>
           </div>
-          <div className="flex justify-content-between">
+          {/* <div className="flex justify-content-between">
             <span>Songs</span>
-            <span>3456</span>
+            <span>{tracks.length}</span>
+          </div> */}
+          <div className="flex flex-grow text-sm">
+            <Link href="/">
+              <a className="flex ml-auto align-items-center font-bold">
+                View more <ArrowSmRightIcon width="1.6rem" />
+              </a>
+            </Link>
           </div>
-          <span className="font-bold">View more</span>
         </div>
-        <PlaylistCard title="Say You" bg="NH7E7Yb.png" />
-        <PlaylistCard title="Don't Care Crown" bg="kqrgm3h.png" />
-        <PlaylistCard title="Don't Care Crown" bg="kqrgm3h.png" />
-        <PlaylistCard title="Don't Care Crown" bg="kqrgm3h.png" />
-        <PlaylistCard title="Don't Care Crown" bg="kqrgm3h.png" />
-        <PlaylistCard title="Don't Care Crown" bg="kqrgm3h.png" />
-        <PlaylistCard title="Don't Care Crown" bg="kqrgm3h.png" />
+        {playlists.sort((a: Playlist, b: Playlist) => new Date(b.date).getTime() - new Date(a.date).getTime()).map((playlist: any) => (
+          <Link href={`/playlist/${playlist.id}`} key={playlist.id}>
+            <a>
+              <PlaylistCard playlist={playlist} tracks={tracks}/>
+            </a>
+          </Link>
+        ))}
       </div>
     </>
   );

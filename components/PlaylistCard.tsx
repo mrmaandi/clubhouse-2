@@ -1,31 +1,39 @@
 import { CalendarIcon, MusicNoteIcon } from "@heroicons/react/solid";
+import { format } from "date-fns";
 import Image from "next/image";
 import { Badge } from "primereact/badge";
 import React from "react";
+import { AMAZON_URL } from "../pages/_app";
 
-const PlaylistCard = (props: { title: string; bg: string }) => {
+const PlaylistCard = ({ playlist, tracks }: any) => {
   return (
     <div className="relative mt-4">
-      <p className="absolute z-2 bottom-0 mx-4 mb-3 text-3xl font-semibold" style={{ color: "white" }}>{props.title}</p>
+      <p
+        className="absolute z-2 bottom-0 mx-4 mb-3 text-3xl font-semibold"
+        style={{ color: "white" }}
+      >
+        {playlist.name}
+      </p>
       <div className="absolute z-2 top-0 right-0 mt-3 mx-3">
         <div className="flex flex-column align-items-end" style={{ gap: 8 }}>
           <Badge
             value={
               <span className="flex align-items-center" style={{ gap: 5 }}>
-                <CalendarIcon height="1rem" /> 12 Dec 2021
+                <CalendarIcon height="1rem" />
+                {format(new Date(playlist.date), "yyyy-MM-dd")}
               </span>
             }
             className="bg-white font-normal"
-            style={{ color: 'var(--text-primary)' }}
+            style={{ color: "var(--text-primary)" }}
           />
           <Badge
             value={
               <span className="flex align-items-center" style={{ gap: 5 }}>
-                <MusicNoteIcon height="1rem" /> 15
+                <MusicNoteIcon height="1rem" /> {playlist._count.tracks}
               </span>
             }
             className="bg-white font-normal"
-            style={{ color: 'var(--text-primary)' }}
+            style={{ color: "var(--text-primary)" }}
           />
         </div>
       </div>
@@ -37,9 +45,9 @@ const PlaylistCard = (props: { title: string; bg: string }) => {
         }}
       ></div>
       <Image
-        src={`/img/${props.bg}`}
+        src={`${AMAZON_URL}/${playlist.sampleflipId}/${playlist.covers[0]?.fileName}`}
         width="100%"
-        height="55em"
+        height="58rem"
         layout="responsive"
         objectFit="cover"
         alt="cover"

@@ -1,40 +1,46 @@
 import type { NextPage } from "next";
-import Image from "next/image";
+import ContextMenu from "../components/ContextMenu";
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ playlists }: any) => {
   return (
-    <div className="w-full h-full overflow-y-auto">
-      <div className="relative h-15rem">
-        <div className="container">
-          <p
-            className="absolute z-2 bottom-0 mb-5 text-5xl font-semibold"
-            style={{ color: "white" }}
-          >
-            Playlist Title
-          </p>
-        </div>
-        <div
-          className="z-1 absolute h-full w-full"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.6) 140%)",
-          }}
-        ></div>
-        <Image
-          src={`/img/kqrgm3h.png`}
-          width="100%"
-          height="100%"
-          layout="fill"
-          objectFit="cover"
-          alt="cover"
-        />
+    <div className="flex">
+      <div
+        className="p-4 w-23rem overflow-y-scroll"
+        style={{ height: "calc(100vh - 10rem - 2px)" }}
+      >
+        <ContextMenu playlists={playlists} />
       </div>
-      <div className="container">
-        <h1>Something coming here</h1>
-        <p>Playlist songs etc</p>
+      <div
+        className="flex flex-1 border-left-2 border-200"
+        style={{ backgroundColor: "var(--surface-0)" }}
+      >
+        <div className="w-full h-full overflow-y-auto">test</div>
       </div>
     </div>
   );
 };
+
+export async function getStaticProps() {
+  const playlists = [
+    {
+      id: 1,
+      name: "Say You",
+      date: new Date(),
+      image: "kqrgm3h.png"
+    },
+    {
+      id: 2,
+      name: "Say You2",
+      date: new Date(),
+      image: "NH7E7Yb.png"
+    }
+  ];
+
+  return {
+    props: {
+      playlists: JSON.parse(JSON.stringify(playlists)),
+    },
+  };
+}
 
 export default Home;
