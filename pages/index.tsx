@@ -1,5 +1,8 @@
+import { PrismaClient } from "@prisma/client";
 import type { NextPage } from "next";
 import ContextMenu from "../components/ContextMenu";
+
+const prisma = new PrismaClient();
 
 const Home: NextPage = ({ playlists }: any) => {
   return (
@@ -14,27 +17,16 @@ const Home: NextPage = ({ playlists }: any) => {
         className="flex flex-1 border-left-2 border-200"
         style={{ backgroundColor: "var(--surface-0)" }}
       >
-        <div className="w-full h-full overflow-y-auto">test</div>
+        <div className="w-full h-full overflow-y-auto">Welcome!</div>
       </div>
     </div>
   );
 };
 
 export async function getStaticProps() {
-  const playlists = [
-    {
-      id: 1,
-      name: "Say You",
-      date: new Date(),
-      image: "kqrgm3h.png"
-    },
-    {
-      id: 2,
-      name: "Say You2",
-      date: new Date(),
-      image: "NH7E7Yb.png"
-    }
-  ];
+  const playlists = await prisma.playlist.findMany({
+    include: { covers: true, _count: { select: { tracks: true }, } },
+  });
 
   return {
     props: {

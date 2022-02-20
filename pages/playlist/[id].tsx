@@ -109,43 +109,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     },
   });
 
-  /* const playlists = [
-    {
-      id: 1,
-      name: "Say You",
-      date: new Date(),
-      image: "kqrgm3h.png",
-    },
-    {
-      id: 2,
-      name: "Say You2",
-      date: new Date(),
-      image: "NH7E7Yb.png",
-    },
-  ];
-
-  const playlist = {
-    id: 1,
-    name: "Say You",
-    date: new Date(),
-    image: "/img/kqrgm3h.png",
-    tracks: [
-      {
-        id: 1,
-        authorName: "Villem",
-        fileUrl: "fileurl",
-      },
-      {
-        id: 2,
-        authorName: "Villem 2",
-        fileUrl: "fileurl 2",
-      },
-    ],
-  }; */
-
-  console.log(playlists);
-  console.log(tracks);
-
   return {
     props: {
       playlists: JSON.parse(JSON.stringify(playlists)),
