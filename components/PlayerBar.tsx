@@ -38,7 +38,7 @@ const PlayerBar = (): JSX.Element => {
   }, [currentPlaylist?.sampleflipId, currentTrack, id, ref])
   
   if (!currentTrack || !currentPlaylist) {
-    return <>no track</>;
+    return <div className="mx-3"></div>;
   }
 
   // audioElement.addEventListener("ended", nextTrack);

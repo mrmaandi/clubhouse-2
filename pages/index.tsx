@@ -8,7 +8,7 @@ const Home: NextPage = ({ playlists }: any) => {
   return (
     <div className="flex">
       <div
-        className="p-4 w-23rem overflow-y-scroll"
+        className="p-4 w-23rem overflow-y-auto"
         style={{ height: "calc(100vh - 10rem - 2px)" }}
       >
         <ContextMenu playlists={playlists} />
@@ -17,7 +17,7 @@ const Home: NextPage = ({ playlists }: any) => {
         className="flex flex-1 border-left-2 border-200"
         style={{ backgroundColor: "var(--surface-0)" }}
       >
-        <div className="w-full h-full overflow-y-auto">Welcome!</div>
+        <div className="w-full h-full">Welcome!</div>
       </div>
     </div>
   );

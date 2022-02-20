@@ -36,10 +36,9 @@ const Playlist = ({ playlists, tracks }: any) => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex" style={{ height: "calc(100vh - 10rem - 2px)" }}>
       <div
-        className="p-4 w-23rem overflow-y-scroll"
-        style={{ height: "calc(100vh - 10rem - 2px)" }}
+        className="p-4 w-23rem overflow-y-auto"
       >
         <ContextMenu playlists={playlists} tracks={tracks} />
       </div>
@@ -85,7 +84,7 @@ const Playlist = ({ playlists, tracks }: any) => {
                 onClick={(e) => onPlay(track)}
                 className="cursor-pointer"
               >
-                {track.author.name} {track.fileName}
+                <span className="font-bold">{track.author.name}</span> {track.fileName}
               </div>
             ))}
           </div>
