@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { InputText } from "primereact/inputtext";
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import {
@@ -26,7 +27,7 @@ const Playlist = ({ playlists, tracks }: any) => {
 
   useEffect(() => {
     setCurrentPlaylist(playlist);
-  }, [id, playlist, setCurrentPlaylist])
+  }, [id, playlist, setCurrentPlaylist]);
 
   const onPlay = (track: Track | any) => {
     console.log(track);
@@ -36,57 +37,69 @@ const Playlist = ({ playlists, tracks }: any) => {
   };
 
   return (
-    <div className="flex" style={{ height: "calc(100vh - 10rem - 2px)" }}>
-      <div
-        className="p-4 w-23rem overflow-y-auto"
-      >
+    <div className="flex w-full">
+      <div className="w-24rem">
         <ContextMenu playlists={playlists} tracks={tracks} />
       </div>
-      <div
-        className="flex flex-1 border-left-2 border-200"
-        style={{ backgroundColor: "var(--surface-0)" }}
-      >
-        <div className="w-full h-full overflow-y-auto">
-          <div className="relative h-15rem">
-            <div className="container">
-              <p
-                className="absolute z-2 bottom-0 mb-5 text-5xl font-semibold"
-                style={{ color: "white" }}
-              >
-                {playlist.name}
-              </p>
-            </div>
-            <div
-              className="z-1 absolute h-full w-full"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.6) 140%)",
-              }}
-            ></div>
-            {playlist.covers[0] && (
-              <Image
-                src={`${AMAZON_URL}/${currentPlaylist?.sampleflipId}/${playlist.covers[0].fileName}`}
-                width="100%"
-                height="100%"
-                layout="fill"
-                objectFit="cover"
-                alt="cover"
-              />
-            )}
-          </div>
-          <div className="container">
-            <h1>Info</h1>
-            <p>Created at: {format(new Date(playlist.date), "yyyy-MM-dd")}</p>
-            <h2>Playlist tracks</h2>
-            {tracks.map((track: any) => (
-              <div
-                key={track.id}
-                onClick={(e) => onPlay(track)}
-                className="cursor-pointer"
-              >
-                <span className="font-bold">{track.author.name}</span> {track.fileName}
+
+      <div className="flex flex-1">
+        <div className="flex flex-1 flex-column">
+          <div className="flex align-items-center h-6rem">
+            <div className="text-4xl font-bold text-primary uppercase">
+              <div>
+                <span className="p-input-icon-left">
+                  <i className="pi pi-search" />
+                  <InputText defaultValue="" placeholder="Search" />
+                </span>
               </div>
-            ))}
+            </div>
+          </div>
+          <div className="w-full flex-1 flex-column overflow-y-auto">
+            <div className="relative">
+              <div className="container">
+                <p
+                  className="absolute z-2 bottom-0 mb-5 text-5xl font-semibold"
+                  style={{ color: "white" }}
+                >
+                  {playlist.name}
+                </p>
+              </div>
+              <div className="h-15rem">
+                <div
+                  className="z-1 absolute h-full w-full border-round"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.6) 140%)",
+                  }}
+                ></div>
+                {playlist.covers[0] && (
+                  <Image
+                    src={`${AMAZON_URL}/${currentPlaylist?.sampleflipId}/${playlist.covers[0].fileName}`}
+                    width="100%"
+                    height="100%"
+                    layout="fill"
+                    objectFit="cover"
+                    alt="cover"
+                    className="border-round"
+                  />
+                )}
+              </div>
+            </div>
+            <div className="container">
+              <h1>Info</h1>
+              <p>Created at: {format(new Date(playlist.date), "yyyy-MM-dd")}</p>
+              <h2>Playlist tracks</h2>
+              {tracks.map((track: any) => (
+                <div
+                  key={track.id}
+                  onClick={(e) => onPlay(track)}
+                  className="cursor-pointer"
+                >
+                  <span className="font-bold">{track.author.name}</span>{" "}
+                  {track.fileName}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -96,7 +109,7 @@ const Playlist = ({ playlists, tracks }: any) => {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const playlists = await prisma.playlist.findMany({
-    include: { covers: true, _count: { select: { tracks: true }, } },
+    include: { covers: true, _count: { select: { tracks: true } } },
   });
 
   const tracks = await prisma.track.findMany({

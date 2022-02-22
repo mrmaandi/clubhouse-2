@@ -8,16 +8,20 @@ const Home: NextPage = ({ playlists }: any) => {
   return (
     <div className="flex">
       <div
-        className="p-4 w-23rem overflow-y-auto"
-        style={{ height: "calc(100vh - 10rem - 2px)" }}
+        className="flex p-4 w-23rem"
       >
         <ContextMenu playlists={playlists} />
       </div>
-      <div
-        className="flex flex-1 border-left-2 border-200"
-        style={{ backgroundColor: "var(--surface-0)" }}
-      >
-        <div className="w-full h-full">Welcome!</div>
+      <div className="flex flex-1">
+        <div className="flex flex-column">
+          <div className="w-full"><h2>Search</h2></div>
+          <div
+            className="flex flex-1 h-full"
+            style={{ backgroundColor: "var(--surface-0)" }}
+          >
+            Welcome!
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -25,7 +29,7 @@ const Home: NextPage = ({ playlists }: any) => {
 
 export async function getStaticProps() {
   const playlists = await prisma.playlist.findMany({
-    include: { covers: true, _count: { select: { tracks: true }, } },
+    include: { covers: true, _count: { select: { tracks: true } } },
   });
 
   return {

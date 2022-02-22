@@ -11,15 +11,7 @@ const TopBar = (): JSX.Element => {
           <h2 className="my-0">Playlists</h2>
           <h4>BETA</h4>
         </div>
-        {/* <div>
-          <span className="p-input-icon-left">
-            <i className="pi pi-search" />
-            <InputText
-              defaultValue=""
-              placeholder="Search"
-            />
-          </span>
-        </div> */}
+      
       </div>
     </>
   );

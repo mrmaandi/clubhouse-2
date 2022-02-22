@@ -12,27 +12,15 @@ const Layout = ({ children }: any) => {
         <title>Clubhouse</title>
       </Head>
 
-      <main className="overflow-hidden">
-        <div className="flex flex-column flex-1">
-          <div className="flex">
-            <div
-              className="flex flex-grow"
-              style={{ backgroundColor: "var(--surface-100)" }}
-            >
-              <SideMenu />
-            </div>
-            <div className="flex flex-column w-full">
-              <div className="flex border-bottom-2 border-200">
-                <TopBar />
-              </div>
-              {children}
-            </div>
-          </div>
-        </div>
-        <div className="flex h-5rem">
-          <PlayerBar />
+      <main>
+        <div className="flex">
+          <SideMenu />
+          <div className="flex flex-1 h-screen overflow-y-auto">{children}</div>
         </div>
       </main>
+      {/*         <div className="flex h-5rem">
+          <PlayerBar />
+        </div> */}
     </>
   );
 };

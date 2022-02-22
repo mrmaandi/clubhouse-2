@@ -24,7 +24,7 @@ const PlaylistCard = ({ playlist, tracks }: any) => {
               </span>
             }
             className="bg-white font-normal"
-            style={{ color: "var(--text-primary)" }}
+            style={{ color: "var(--text-color)" }}
           />
           <Badge
             value={
@@ -33,12 +33,12 @@ const PlaylistCard = ({ playlist, tracks }: any) => {
               </span>
             }
             className="bg-white font-normal"
-            style={{ color: "var(--text-primary)" }}
+            style={{ color: "var(--text-color)" }}
           />
         </div>
       </div>
       <div
-        className="z-1 absolute h-full w-full border-round"
+        className="z-1 absolute h-full w-full border-round shadow-4"
         style={{
           background:
             "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.6) 140%)",
@@ -47,7 +47,7 @@ const PlaylistCard = ({ playlist, tracks }: any) => {
       <Image
         src={`${AMAZON_URL}/${playlist.sampleflipId}/${playlist.covers[0]?.fileName}`}
         width="100%"
-        height="58rem"
+        height="56rem"
         layout="responsive"
         objectFit="cover"
         alt="cover"
