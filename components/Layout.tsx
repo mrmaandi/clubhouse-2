@@ -18,9 +18,7 @@ const Layout = ({ children }: any) => {
           <div className="flex flex-1 h-screen overflow-y-auto">{children}</div>
         </div>
       </main>
-      {/*         <div className="flex h-5rem">
-          <PlayerBar />
-        </div> */}
+      <PlayerBar />
     </>
   );
 };

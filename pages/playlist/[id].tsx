@@ -54,7 +54,7 @@ const Playlist = ({ playlists, tracks }: any) => {
               </div>
             </div>
           </div>
-          <div className="w-full flex-1 flex-column overflow-y-auto">
+          <div className="w-full">
             <div className="relative">
               <div className="container">
                 <p
@@ -85,20 +85,24 @@ const Playlist = ({ playlists, tracks }: any) => {
                 )}
               </div>
             </div>
-            <div className="container">
-              <h1>Info</h1>
-              <p>Created at: {format(new Date(playlist.date), "yyyy-MM-dd")}</p>
-              <h2>Playlist tracks</h2>
-              {tracks.map((track: any) => (
-                <div
-                  key={track.id}
-                  onClick={(e) => onPlay(track)}
-                  className="cursor-pointer"
-                >
-                  <span className="font-bold">{track.author.name}</span>{" "}
-                  {track.fileName}
-                </div>
-              ))}
+            <div className="surface-card border-round shadow-3 mt-5 overflow-y-auto">
+              <div className="container">
+                <h1>Info</h1>
+                <p>
+                  Created at: {format(new Date(playlist.date), "yyyy-MM-dd")}
+                </p>
+                <h2>Playlist tracks</h2>
+                {tracks.map((track: any) => (
+                  <div
+                    key={track.id}
+                    onClick={(e) => onPlay(track)}
+                    className="cursor-pointer"
+                  >
+                    <span className="font-bold">{track.author.name}</span>{" "}
+                    {track.fileName}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

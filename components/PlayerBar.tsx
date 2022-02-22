@@ -26,17 +26,17 @@ const PlayerBar = (): JSX.Element => {
   const [volume, setVolume] = useState(50);
   const router = useRouter();
   const { id } = router.query;
-  
+
   let ref = useRef<any>();
-  
+
   useEffect(() => {
     if (currentTrack) {
       ref.current = document.createElement("audio");
       ref.current.src = `${AMAZON_URL}/${currentPlaylist?.sampleflipId}/${currentTrack.fileName}`;
       ref.current.load();
     }
-  }, [currentPlaylist?.sampleflipId, currentTrack, id, ref])
-  
+  }, [currentPlaylist?.sampleflipId, currentTrack, id, ref]);
+
   if (!currentTrack || !currentPlaylist) {
     return <div className="mx-3"></div>;
   }
@@ -45,59 +45,64 @@ const PlayerBar = (): JSX.Element => {
 
   const playPauseTrack = () => {
     if (!isPlaying) {
-      ref.current.play()
+      ref.current.play();
     } else {
       ref.current.pause();
     }
     setIsPlaying(!isPlaying);
   };
-  
-  const nextTrack = () => {
 
-  };
+  const nextTrack = () => {};
 
   return (
-    <div className="grid align-items-center w-full mx-3">
-      <div className="col">
-        <div className="flex align-items-center" style={{ gap: 15 }}>
-          <div className="relative w-4rem h-4rem">
-            <Image
-              src={`${AMAZON_URL}/${currentPlaylist.sampleflipId}/${
-                (currentPlaylist as any).covers[0].fileName
-              }`}
-              layout="fill"
-              objectFit="cover"
-              alt="cover"
-              className="border-round"
-            />
-          </div>
-          <div className="flex flex-column">
-            <div>{currentPlaylist.name}</div>
-            <div className="font-bold">{(currentTrack as any).author.name}</div>
+    <div className="absolute z-3 left-0 right-0 bottom-0 m-3 border-round shadow-7 surface-hover">
+      <div className="grid grid-nogutter align-items-center p-3">
+        <div className="col">
+          <div className="flex align-items-center" style={{ gap: 20 }}>
+            <div className="relative w-4rem h-4rem">
+              <Image
+                src={`${AMAZON_URL}/${currentPlaylist.sampleflipId}/${
+                  (currentPlaylist as any).covers[0].fileName
+                }`}
+                layout="fill"
+                objectFit="cover"
+                alt="cover"
+                className="border-round"
+              />
+            </div>
+            <div className="flex flex-column">
+              <div>{currentPlaylist.name}</div>
+              <div className="font-bold">
+                {(currentTrack as any).author.name}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="col">
-        <div className="flex align-content-center align-items-center justify-content-evenly">
-          <RewindIcon height="2rem" />
-          {isPlaying ? (
-            <PauseIcon height="3rem" onClick={playPauseTrack} />
-          ) : (
-            <PlayIcon height="3rem" onClick={playPauseTrack} />
-          )}
-          <FastForwardIcon height="2rem" />
+        <div className="col">
+          <div className="flex align-content-center align-items-center justify-content-evenly">
+            <RewindIcon height="2rem" />
+            {isPlaying ? (
+              <PauseIcon height="3rem" onClick={playPauseTrack} />
+            ) : (
+              <PlayIcon height="3rem" onClick={playPauseTrack} />
+            )}
+            <FastForwardIcon height="2rem" />
+          </div>
         </div>
-      </div>
-      <div className="col">
-        <div className="flex justify-content-end">
-          <div className="flex align-items-center w-15rem" style={{ gap: 15 }}>
-            <VolumeOffIcon height="1.5rem" />
-            <Slider
-              className="flex-1 w-20"
-              value={volume}
-              onChange={(e) => setVolume(Number(e.value))}
-            />
-            <VolumeUpIcon height="1.5rem" />
+        <div className="col">
+          <div className="flex justify-content-end">
+            <div
+              className="flex align-items-center w-15rem"
+              style={{ gap: 15 }}
+            >
+              <VolumeOffIcon height="1.5rem" />
+              <Slider
+                className="flex-1 w-20"
+                value={volume}
+                onChange={(e) => setVolume(Number(e.value))}
+              />
+              <VolumeUpIcon height="1.5rem" />
+            </div>
           </div>
         </div>
       </div>
