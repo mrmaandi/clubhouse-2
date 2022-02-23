@@ -1,5 +1,6 @@
 :root {
   --border-radius: 15px;
+  --text-color: #2B2B2B;
 }
 
 html,body {
@@ -34,5 +35,5 @@ a:hover {
 } */
 
 .container { margin-left: auto; margin-right: auto; }
-@media only screen and (max-width: 500px) { .container { max-width: 100%; } }
-@media only screen and (min-width: 700px) { .container { max-width: 80%; } }
+@media only screen and (max-width: 700px) { .container { max-width: 80%; } }
+@media only screen and (min-width: 700px) { .container { max-width: 90%; } }

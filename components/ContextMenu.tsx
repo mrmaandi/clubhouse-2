@@ -6,14 +6,14 @@ import { Playlist } from "@prisma/client";
 const ContextMenu = ({ playlists, tracks }: any): JSX.Element => {
   return (
     <div className="flex flex-column h-screen">
-      <div className="flex align-items-center h-6rem px-5">
+      <div className="flex align-items-end h-4rem px-5 mb-5">
         <div className="text-3xl font-bold text-primary uppercase">
           Playlists
         </div>
       </div>
 
-      <div className="flex flex-column flex-1 overflow-y-auto px-5">
-        <div className="border-round p-3 surface-card shadow-3">
+      <div className="flex flex-column flex-1 overflow-y-auto px-5 pt-1">
+        <div className="border-round p-3 surface-card shadow-1">
           <div className="flex justify-content-between align-items-center">
             <span className="text-2xl font-bold">Overview</span>
             <span>

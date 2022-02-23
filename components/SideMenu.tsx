@@ -24,11 +24,11 @@ const SideMenu = (): JSX.Element => {
             <HomeIcon color="var(--surface-a)" width="1.8rem" />
           </a>
         </Link>
-        <Link href="/users">
+        {/* <Link href="/users">
           <a>
             <UserIcon color="var(--surface-a)" width="1.8rem" />
           </a>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

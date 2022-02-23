@@ -38,7 +38,7 @@ const PlaylistCard = ({ playlist, tracks }: any) => {
         </div>
       </div>
       <div
-        className="z-1 absolute h-full w-full border-round shadow-4"
+        className="z-1 absolute h-full w-full border-round shadow-3"
         style={{
           background:
             "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.6) 140%)",
