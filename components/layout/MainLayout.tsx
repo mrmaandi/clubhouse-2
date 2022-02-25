@@ -1,11 +1,9 @@
 import Head from "next/head";
 import React from "react";
-import ContextMenu from "./ContextMenu";
-import PlayerBar from "./PlayerBar";
+import PlayerBar from "../player/PlayerBar";
 import SideMenu from "./SideMenu";
-import TopBar from "./TopBar";
 
-const Layout = ({ children }: any) => {
+const MainLayout = ({ children }: any) => {
   return (
     <>
       <Head>
@@ -13,7 +11,7 @@ const Layout = ({ children }: any) => {
       </Head>
 
       <main>
-        <div className="flex">
+        <div className="flex flex-wrap">
           <SideMenu />
           <div className="flex flex-1 h-screen overflow-y-auto">{children}</div>
         </div>
@@ -23,4 +21,4 @@ const Layout = ({ children }: any) => {
   );
 };
 
-export default Layout;
+export default MainLayout;

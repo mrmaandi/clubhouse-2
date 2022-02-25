@@ -1,15 +1,15 @@
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
-import ContextMenu from "../components/contextmenu/ContextMenu";
-import ContextMenuPlaylists from "../components/contextmenu/ContextMenuPlaylists";
+import ContextMenu from "../../components/contextmenu/ContextMenu";
+import ContextMenuArtists from "../../components/contextmenu/ContextMenuArtists";
 
 const prisma = new PrismaClient();
 
 interface PageProps {
-  playlists: PlaylistExtended;
+  artists: UserExtended[]
 }
 
-const Home = ({ playlists }: PageProps) => {
+const Artists = ({ artists }: PageProps) => {
   const WelcomeCard = () => (
     <div className="surface-card shadow-1 border-round my-4 py-7 overflow-y-auto">
       <div className="flex flex-column container" style={{ gap: 35 }}>
@@ -18,8 +18,8 @@ const Home = ({ playlists }: PageProps) => {
             <h1 className="my-0">Welcome to the clubhouse</h1>
             <p className="line-height-3 text-justify text-500 text-lg mt-5">
               Hello folks and welcome to the clubhouse! The site has received a
-              refresh with new design (unfinished). This is still a work in
-              progress though — new features will be added (ex: search,
+              refresh with new design (unfinished). This is still a
+              work in progress though — new features will be added (ex: search,
               dark-mode switch, mobile-friendly design, etc) and any issues will
               be fixed. So please bear with me while these things will be added.
               Any suggestions are also welcome (DM me on Discord: VilleM#6257).
@@ -49,11 +49,10 @@ const Home = ({ playlists }: PageProps) => {
           <div className="col">
             <h2>Sample Flips</h2>
             <p className="line-height-3 text-justify text-500 text-lg mt-5">
-              All the previous sample flips are still here. I&apos;m not sure
-              about adding any new sample flip files, since it&apos;s manual
-              labour to download files from Discord, upload them to storage and
-              pair them to the correct user in the site&apos;s database. It
-              takes time and there are more optimal solutions for the problem.
+              All the previous sample flips are still here. I&apos;m not sure about
+              adding any new sample flip files, since it&apos;s manual labour to
+              download files from Discord, upload them to storage and pair them
+              to the correct user in the site&apos;s database. It takes time and there are more optimal solutions for the problem.
             </p>
           </div>
         </div>
@@ -75,8 +74,8 @@ const Home = ({ playlists }: PageProps) => {
   return (
     <div className="flex w-full">
       <div className="w-24rem">
-        <ContextMenu title="Playlists">
-          <ContextMenuPlaylists playlists={playlists} />
+        <ContextMenu title="Artists">
+          <ContextMenuArtists artists={artists} />
         </ContextMenu>
       </div>
 
@@ -102,15 +101,13 @@ const Home = ({ playlists }: PageProps) => {
 };
 
 export async function getStaticProps() {
-  const playlists = await prisma.playlist.findMany({
-    include: { covers: true, _count: { select: { tracks: true } } },
-  });
+  const artists = await prisma.user.findMany({ include: { _count: { select: { tracks: true } } }});
 
   return {
     props: {
-      playlists: JSON.parse(JSON.stringify(playlists)),
+      artists: JSON.parse(JSON.stringify(artists)),
     },
   };
 }
 
-export default Home;
+export default Artists;

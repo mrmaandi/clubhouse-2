@@ -3,9 +3,13 @@ import { format } from "date-fns";
 import Image from "next/image";
 import { Badge } from "primereact/badge";
 import React from "react";
-import { AMAZON_URL } from "../pages/_app";
+import { AMAZON_URL } from "../../pages/_app";
 
-const PlaylistCard = ({ playlist, tracks }: any) => {
+interface ComponentProps {
+  playlist: PlaylistExtended;
+}
+
+const PlaylistCard = ({ playlist }: ComponentProps) => {
   return (
     <div className="relative mt-4">
       <p
@@ -14,7 +18,7 @@ const PlaylistCard = ({ playlist, tracks }: any) => {
       >
         {playlist.name}
       </p>
-      <div className="absolute z-2 top-0 right-0 mt-3 mx-3">
+      <div className="absolute z-2 top-0 right-0 mt-3 mx-3 ">
         <div className="flex flex-column align-items-end" style={{ gap: 8 }}>
           <Badge
             value={

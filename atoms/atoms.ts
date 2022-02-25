@@ -1,4 +1,3 @@
-import { Playlist, Track } from "@prisma/client";
 import { atom } from "recoil";
 
 export const playerActiveState = atom<boolean>({
@@ -6,12 +5,7 @@ export const playerActiveState = atom<boolean>({
   default: false
 });
 
-export const playerPlaylistState = atom<Playlist | undefined>({
-  key: "playerPlaylistState",
-  default: undefined
-});
-
-export const playerTracksState = atom<Track[]>({
+export const playerTracksState = atom<TrackExtended[]>({
   key: "playerTracksState",
   default: []
 });
@@ -36,3 +30,7 @@ export const playerTrackIndexState = atom<number>({
   default: 0
 });
 
+export const playerPlaylistViewState = atom<boolean>({
+  key: "playerPlaylistViewState",
+  default: false
+});

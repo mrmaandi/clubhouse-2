@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { HomeIcon } from "@heroicons/react/solid";
-import { UserIcon } from "@heroicons/react/outline";
+import { HomeIcon, UserIcon } from "@heroicons/react/solid";
 
 const SideMenu = (): JSX.Element => {
   return (
@@ -24,11 +23,11 @@ const SideMenu = (): JSX.Element => {
             <HomeIcon color="var(--surface-a)" width="1.8rem" />
           </a>
         </Link>
-        {/* <Link href="/users">
+        <Link href="/artists">
           <a>
             <UserIcon color="var(--surface-a)" width="1.8rem" />
           </a>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );
